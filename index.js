@@ -27,14 +27,17 @@ btnAdd.addEventListener("click", function () {
 });
 
 onValue(shoppingListInDB, function (snapshot) {
-  let itemsArray = Object.entries(snapshot.val());
-  clearShoppingListEl();
-  clearInputFieldEl();
-  for (var i = 0; i < itemsArray.length; i++) {
-    let currentItem = itemsArray[i];
-
-    appendItemToShoppingListEl(currentItem);
+  // Challenge: Change the onValue code so that it uses snapshot.exists() to show items when there are items in the database and if there are not displays the text 'No items here... yet'.
+  if (snapshot.exists()) {
+    let itemsArray = Object.entries(snapshot.val());
+    clearShoppingListEl();
+    clearInputFieldEl();
+    for (var i = 0; i < itemsArray.length; i++) {
+      let currentItem = itemsArray[i];
+      appendItemToShoppingListEl(currentItem);
+  }  
   }
+  else shoppingListEl.innerHTML = "No items here... yet"
 });
 
 function clearShoppingListEl() {
@@ -53,8 +56,7 @@ function appendItemToShoppingListEl(item) {
 
   let newEl = document.createElement("li");
   newEl.textContent = itemValue;
-  // Challenge: Attach an event listener to newEl and make it so you console log the id of the item when it's pressed.
-  newEl.addEventListener("dblclick", function () {
+  newEl.addEventListener("click", function () {
     let exactLocationOfItemInDB = ref(database, `shoppingList/${itemID}`);
     remove(exactLocationOfItemInDB);
   });

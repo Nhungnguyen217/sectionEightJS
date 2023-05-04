@@ -16,15 +16,20 @@ const shoppingListInDB = ref(database, "shoppingList");
 
 const inputFieldEl = document.getElementById("input-field");
 const btnAdd = document.getElementById("add-button");
-const ulEl = document.getElementById("shopping-list");
+const shoppingListEl = document.getElementById("shopping-list");
 
 btnAdd.addEventListener("click", function () {
   let inputValue = inputFieldEl.value;
   push(shoppingListInDB, inputValue);
   console.log(`${inputValue} added to firebase CatScrimbaMobileApp`);
-
-  // Challenge: Clear the input field when button is pressed
-  ulEl.innerHTML += `<li> ${inputValue} </li>`;
-  inputFieldEl.value = ""
-
+  clearInputFieldEl()
+  appendItemToShoppingListEl(inputValue)
 });
+
+function clearInputFieldEl() {
+    inputFieldEl.value = ""
+}
+
+function appendItemToShoppingListEl(itemValue) {
+    shoppingListEl.innerHTML += `<li>${itemValue}</li>`
+}

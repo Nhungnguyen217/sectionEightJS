@@ -3,6 +3,7 @@ import {
   getDatabase,
   ref,
   push,
+  onValue,
 } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
 
 const appSettings = {
@@ -21,15 +22,25 @@ const shoppingListEl = document.getElementById("shopping-list");
 btnAdd.addEventListener("click", function () {
   let inputValue = inputFieldEl.value;
   push(shoppingListInDB, inputValue);
-  console.log(`${inputValue} added to firebase CatScrimbaMobileApp`);
+  clearInputFieldEl();
+  appendItemToShoppingListEl(inputValue);
+});
+
+onValue(shoppingListInDB, function (snapshot) {
+  // Challenge: Console log snapshot.val() to show all the items inside of shoppingList in the database
+  let itemsArray = Object.values(snapshot.val());
+  console.log(itemsArray)
   clearInputFieldEl()
-  appendItemToShoppingListEl(inputValue)
+  for(var i=0; i<itemsArray.length; i++) {
+    let currentList = itemsArray[i];
+    appendItemToShoppingListEl(currentList)
+  }
 });
 
 function clearInputFieldEl() {
-    inputFieldEl.value = ""
+  inputFieldEl.value = "";
 }
 
 function appendItemToShoppingListEl(itemValue) {
-    shoppingListEl.innerHTML += `<li>${itemValue}</li>`
+  shoppingListEl.innerHTML += `<li>${itemValue}</li>`;
 }

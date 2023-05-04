@@ -32,8 +32,7 @@ onValue(shoppingListInDB, function (snapshot) {
   console.log(itemsArray)
   clearInputFieldEl()
   for(var i=0; i<itemsArray.length; i++) {
-    let currentList = itemsArray[i];
-    appendItemToShoppingListEl(currentList)
+    appendItemToShoppingListEl(itemsArray[i])
   }
 });
 

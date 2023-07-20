@@ -35,9 +35,8 @@ onValue(shoppingListInDB, function (snapshot) {
     for (var i = 0; i < itemsArray.length; i++) {
       let currentItem = itemsArray[i];
       appendItemToShoppingListEl(currentItem);
-  }  
-  }
-  else shoppingListEl.innerHTML = "No items here... yet"
+    }
+  } else shoppingListEl.innerHTML = "No items here... yet";
 });
 
 function clearShoppingListEl() {

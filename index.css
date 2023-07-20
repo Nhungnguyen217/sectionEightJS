@@ -38,7 +38,7 @@ button {
   font-family: inherit;
 }
 
-button:hover{
+button:hover {
   background-color: #004303;
   cursor: pointer;
 }
@@ -61,7 +61,7 @@ ul li {
   font-size: 20px;
 }
 
-li:hover{
-  background-color: #FFECC7;
+li:hover {
+  background-color: #ffecc7;
   cursor: pointer;
 }
